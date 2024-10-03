@@ -21,8 +21,7 @@ class LectureFacadeIntegrationTest {
     private LectureFacade facade;
 
     @Test
-    @DisplayName("특강 정원이 30명인데 40명이 동시에 특강 신청 시 30명만 성공, 10명은 Exception 발생")
-    void test() throws ExecutionException, InterruptedException {
+    void 특강_정원이_30명인데_40명이_동시에_특강신청시_30명만_성공_10명은_Exception_발생() throws ExecutionException, InterruptedException {
 
         List<CompletableFuture<Boolean>> tasks = new ArrayList<>();
         List<Integer> exceptionCount = new ArrayList<>();
