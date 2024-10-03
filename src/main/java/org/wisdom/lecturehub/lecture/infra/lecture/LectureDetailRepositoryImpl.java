@@ -8,7 +8,6 @@ import org.wisdom.lecturehub.lecture.domain.lecture.LectureInfo;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Repository
 public class LectureDetailRepositoryImpl implements LectureDetailRepository {
@@ -27,8 +26,12 @@ public class LectureDetailRepositoryImpl implements LectureDetailRepository {
     }
 
     @Override
-    public LectureDetailEntity findBy(int lectureDetailId) {
-        return repository.findById(lectureDetailId)
-                .orElseThrow(() -> new NoSuchElementException("등록된 특강이 없습니다."));
+    public LectureDetailEntity findLectureDetailBy(int lectureDetailId) {
+        return repository.findById(lectureDetailId);
+    }
+
+    @Override
+    public void decrementCapacity(int lectureDetailId) {
+        repository.decrementCapacity(lectureDetailId);
     }
 }

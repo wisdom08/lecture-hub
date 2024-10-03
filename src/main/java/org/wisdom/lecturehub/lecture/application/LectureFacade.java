@@ -2,7 +2,9 @@ package org.wisdom.lecturehub.lecture.application;
 
 import lombok.val;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.wisdom.lecturehub.lecture.domain.enrollment.EnrollmentService;
+import org.wisdom.lecturehub.lecture.domain.lecture.LectureDetailEntity;
 import org.wisdom.lecturehub.lecture.domain.lecture.LectureDetailService;
 import org.wisdom.lecturehub.lecture.presentation.ApiDto;
 
@@ -23,9 +25,11 @@ public class LectureFacade {
         this.enrollmentService = enrollmentService;
     }
 
+    @Transactional
     public void apply(FacadeDto.request lectureDto) {
         val lectureDetail = lectureDetailService.getLecturesDetailBy(lectureDto.lectureDetailId());
-        enrollmentService.apply(lectureDto.userId(), lectureDetail);
+        LectureDetailEntity updateLectureDetail = lectureDetailService.decrementCapacity(lectureDetail);
+        enrollmentService.apply(lectureDto.userId(), updateLectureDetail);
     }
 
     public Map<LocalDate, List<ApiDto.response>> getAvailableLectures() {

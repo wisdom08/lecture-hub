@@ -20,7 +20,8 @@ public class EnrollmentService {
 
     @Transactional
     public void apply(int userId, LectureDetailEntity lectureDetail) {
-        enrollmentRepository.save(lectureDetail.toEnrollmentEntity(userId, lectureDetail));
+        val enrollmentEntity = lectureDetail.toEnrollmentEntity(userId, lectureDetail);
+        enrollmentRepository.save(enrollmentEntity);
     }
 
     @Transactional(readOnly = true)

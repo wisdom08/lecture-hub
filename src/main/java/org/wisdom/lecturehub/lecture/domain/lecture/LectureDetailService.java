@@ -24,6 +24,14 @@ public class LectureDetailService {
 
     @Transactional(readOnly = true)
     public LectureDetailEntity getLecturesDetailBy(int lectureDetailId) {
-        return lectureDetailRepository.findBy(lectureDetailId);
+        return lectureDetailRepository.findLectureDetailBy(lectureDetailId);
     }
+
+    @Transactional
+    public LectureDetailEntity decrementCapacity(LectureDetailEntity lectureDetail) {
+        LectureDetailEntity.validCapacity(lectureDetail.getCurrentCapacity());
+        lectureDetailRepository.decrementCapacity(lectureDetail.getId());
+        return lectureDetail.toLectureDetailDecremented();
+    }
+
 }

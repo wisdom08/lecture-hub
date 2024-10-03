@@ -9,5 +9,7 @@ public interface LectureDetailRepository {
 
     List<LectureInfo> findAllAvailableLectures();
 
-    LectureDetailEntity findBy(int lectureDetailId);
+    LectureDetailEntity findLectureDetailBy(int lectureDetailId);
+
+    void decrementCapacity(int lectureDetailId);
 }
