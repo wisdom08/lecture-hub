@@ -56,3 +56,8 @@
     private LectureDetailEntity lectureDetail;
 ```
 
+
+- 애플리케이션 레벨에서 user_id와 lecture_detail_id가 중복된 값이 추가되지 않도록 처리 했지만, 추가적으로 데이터베이스 레벨에서도 중복된 값이 추가되지 않도록 유일성 제약 조건을 추가했다.  
+```sql
+@Table(name = "enrollment", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "lecture_detail_id"})})
+```
