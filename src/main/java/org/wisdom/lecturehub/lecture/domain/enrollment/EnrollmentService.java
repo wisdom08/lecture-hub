@@ -29,4 +29,13 @@ public class EnrollmentService {
         val enrollments = enrollmentRepository.findByUserId(userId);
         return enrollments.stream().map(EnrollmentEntity::toApiResponse).toList();
     }
+
+    @Transactional(readOnly = true)
+    public void validateAlreadyApplied(int userId, int lectureDetailId) {
+        enrollmentRepository.findByUserIdAndLectureDetailId(userId, lectureDetailId)
+            .ifPresent(enrollmentEntity -> {
+                throw new IllegalArgumentException("이미 신청한 특강입니다");
+            }
+        );
+    }
 }

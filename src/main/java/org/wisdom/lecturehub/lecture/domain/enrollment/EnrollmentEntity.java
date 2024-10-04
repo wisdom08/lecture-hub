@@ -11,7 +11,7 @@ import org.wisdom.lecturehub.lecture.presentation.ApiDto;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "enrollment")
+@Table(name = "enrollment", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "lecture_detail_id"})})
 @Entity
 public class EnrollmentEntity extends BaseTimeEntity {
 

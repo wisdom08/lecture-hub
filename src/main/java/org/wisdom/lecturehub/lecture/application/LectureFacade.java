@@ -27,6 +27,7 @@ public class LectureFacade {
 
     @Transactional
     public void apply(FacadeDto.request lectureDto) {
+        enrollmentService.validateAlreadyApplied(lectureDto.userId(), lectureDto.lectureDetailId());
         val lectureDetail = lectureDetailService.getLecturesDetailBy(lectureDto.lectureDetailId());
         LectureDetailEntity updateLectureDetail = lectureDetailService.decrementCapacity(lectureDetail);
         enrollmentService.apply(lectureDto.userId(), updateLectureDetail);
