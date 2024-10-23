@@ -1,5 +1,6 @@
 package org.wisdom.lecturehub.lecture.infra.enrollment;
 
+import java.util.Optional;
 import org.springframework.stereotype.Repository;
 import org.wisdom.lecturehub.lecture.domain.enrollment.EnrollmentEntity;
 import org.wisdom.lecturehub.lecture.domain.enrollment.EnrollmentRepository;
@@ -24,5 +25,10 @@ public class EnrollmentRepositoryImpl implements EnrollmentRepository {
     @Override
     public List<EnrollmentEntity> findByUserId(int userId) {
         return repository.findAllByUserIdWithInstructor(userId);
+    }
+
+    @Override
+    public Optional<EnrollmentEntity> findByUserIdAndLectureDetailId(int userId, int lectureDetailId) {
+        return repository.findByUserIdAndLectureDetailId(userId, lectureDetailId);
     }
 }
